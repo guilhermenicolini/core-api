@@ -1,5 +1,5 @@
 # **Core API**
-This project maintains all Rest API core structure
+This project maintains all API core structure
 
 ## Get Started
 ```
@@ -65,6 +65,7 @@ npm install @guilhermenicolini/core-api@latest
 App is an instance of express() with some pre-defined configurations:
 - /health route
 - body parser middleware that transform body into JSON
+- trim all body and headers string values
 - content-type middleware that set content-type to JSON
 - cors that enable cors to all api
 

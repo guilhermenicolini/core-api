@@ -38,26 +38,6 @@ describe('ExpressMiddleware Adapter', () => {
     expect(middleware.handle).toHaveBeenCalledTimes(1)
   })
 
-  test('Should call handle with authorization request', async () => {
-    const req = getMockReq({ headers: { authorization: 'any_auth' } })
-    await sut(req, res, next)
-
-    expect(middleware.handle).toHaveBeenCalledWith({
-      authorization: 'any_auth'
-    })
-    expect(middleware.handle).toHaveBeenCalledTimes(1)
-  })
-
-  test('Should call handle with Authorization request', async () => {
-    const req = getMockReq({ headers: { Authorization: 'any_auth' } })
-    await sut(req, res, next)
-
-    expect(middleware.handle).toHaveBeenCalledWith({
-      authorization: 'any_auth'
-    })
-    expect(middleware.handle).toHaveBeenCalledTimes(1)
-  })
-
   test('Should call handle with empty request', async () => {
     const req = getMockReq()
 

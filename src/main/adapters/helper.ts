@@ -1,8 +1,11 @@
-export const trimmer = (body: any): any => {
-  const trimmed = {}
-  for (const [key, value] of Object.entries(body)) {
-    if (key.includes('uthorization')) return
-    if (typeof (value) === 'string') { Object.assign(trimmed, { [key]: value.trim() }) }
+import { Request } from 'express'
+
+export const getRequest = (req: Request): any => {
+  const request = {
+    ...req.body,
+    ...req.params,
+    ...req.headers
   }
-  return trimmed
+
+  return request
 }

@@ -1,15 +1,11 @@
 import { Controller } from '../../application/controllers'
 import { RequestHandler } from 'express'
-import { trimmer } from './helper'
+import { getRequest } from './helper'
 
 type Adapter = (controller: Controller) => RequestHandler
 
 export const adaptExpressRoute: Adapter = controller => async (req, res) => {
-  const request = {
-    ...trimmer(req.body),
-    ...req.params,
-    ...trimmer(req.headers)
-  }
+  const request = getRequest(req)
   const { statusCode, body } = await controller.handle(request)
 
   let data: any

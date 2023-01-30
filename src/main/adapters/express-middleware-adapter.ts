@@ -1,15 +1,11 @@
 import { Middleware } from '../../application/middlewares'
 import { RequestHandler } from 'express'
-import { trimmer } from './helper'
+import { getRequest } from './helper'
 
 type Adapter = (middleware: Middleware) => RequestHandler
 
 export const adaptExpressMiddleware: Adapter = middleware => async (req, res, next) => {
-  const headers = trimmer(req.headers)
-  const request = {
-    ...headers,
-    authorization: req.headers.Authorization ?? req.headers.authorization
-  }
+  const request = getRequest(req)
   const { statusCode, body } = await middleware.handle(request)
 
   if (statusCode === 200) {

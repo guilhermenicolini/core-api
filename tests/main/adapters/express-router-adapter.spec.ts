@@ -52,14 +52,6 @@ describe('ExpressRouter Adapter', () => {
     expect(controller.handle).toHaveBeenCalledTimes(1)
   })
 
-  test('Should trim body string property', async () => {
-    const spaceReq = getMockReq({ body: { spaceProperty: '  space  ' } })
-    await sut(spaceReq, res, next)
-
-    expect(controller.handle).toHaveBeenCalledWith({ spaceProperty: 'space' })
-    expect(controller.handle).toHaveBeenCalledTimes(1)
-  })
-
   test('Should call handle with empty request', async () => {
     const req = getMockReq()
 

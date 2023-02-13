@@ -43,7 +43,7 @@ describe('Controller', () => {
     const httpResponse = await sut.handle('any_value')
     expect(httpResponse).toEqual({
       statusCode: 400,
-      body: error
+      error
     })
   })
 
@@ -54,9 +54,9 @@ describe('Controller', () => {
     const httpResponse = await sut.handle('any_value')
     expect(httpResponse).toEqual({
       statusCode: 500,
-      body: new ServerError(error)
+      error: new ServerError(error)
     })
-    expect(httpResponse.body.innerException).toEqual(error)
+    expect(httpResponse.error.innerException).toEqual(error)
   })
 
   test('Should return 500 with no error if perform throws not error', async () => {
@@ -66,9 +66,9 @@ describe('Controller', () => {
     const httpResponse = await sut.handle('any_value')
     expect(httpResponse).toEqual({
       statusCode: 500,
-      body: new ServerError(undefined)
+      error: new ServerError(undefined)
     })
-    expect(httpResponse.body.innerException).toEqual(undefined)
+    expect(httpResponse.error.innerException).toEqual(undefined)
   })
 
   test('Should return 400 if perform returns BadRequest', async () => {
@@ -78,7 +78,7 @@ describe('Controller', () => {
     const httpResponse = await sut.handle('any_value')
     expect(httpResponse).toEqual({
       statusCode: 400,
-      body: error
+      error
     })
   })
 
@@ -89,7 +89,7 @@ describe('Controller', () => {
     const httpResponse = await sut.handle('any_value')
     expect(httpResponse).toEqual({
       statusCode: 400,
-      body: error
+      error
     })
   })
 
@@ -100,7 +100,7 @@ describe('Controller', () => {
     const httpResponse = await sut.handle('any_value')
     expect(httpResponse).toEqual({
       statusCode: 401,
-      body: error
+      error
     })
   })
   test('Should return 403 if perform returns ForbiddenError', async () => {
@@ -110,7 +110,7 @@ describe('Controller', () => {
     const httpResponse = await sut.handle('any_value')
     expect(httpResponse).toEqual({
       statusCode: 403,
-      body: error
+      error
     })
   })
 
@@ -121,7 +121,7 @@ describe('Controller', () => {
     const httpResponse = await sut.handle('any_value')
     expect(httpResponse).toEqual({
       statusCode: 404,
-      body: error
+      error
     })
   })
 
@@ -132,7 +132,7 @@ describe('Controller', () => {
     const httpResponse = await sut.handle('any_value')
     expect(httpResponse).toEqual({
       statusCode: 500,
-      body: error
+      error
     })
   })
 

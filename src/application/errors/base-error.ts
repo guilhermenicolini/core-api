@@ -5,4 +5,8 @@ export class BaseError extends Error {
     this.name = name
     this.innerException = error
   }
+
+  toJSON (): string {
+    return `${this.message}. Inner error: ${this.innerException?.message as string}`
+  }
 }

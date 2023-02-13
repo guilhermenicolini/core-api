@@ -73,7 +73,7 @@ describe('ExpressRouter Adapter', () => {
   test('Should return 400 and valid error', async () => {
     controller.handle.mockResolvedValueOnce({
       statusCode: 400,
-      body: new Error('any_error')
+      error: new Error('any_error')
     })
 
     await sut(req, res, next)
@@ -87,7 +87,7 @@ describe('ExpressRouter Adapter', () => {
   test('Should return 500 and valid error', async () => {
     controller.handle.mockResolvedValueOnce({
       statusCode: 500,
-      body: new ServerError(new Error('any_error'))
+      error: new ServerError(new Error('any_error'))
     })
 
     await sut(req, res, next)
@@ -101,7 +101,7 @@ describe('ExpressRouter Adapter', () => {
   test('Should call __ on response error', async () => {
     controller.handle.mockResolvedValueOnce({
       statusCode: 400,
-      body: new Error('any_error')
+      error: new Error('any_error')
     })
     const i18nSpy = jest.fn()
     res.__ = i18nSpy

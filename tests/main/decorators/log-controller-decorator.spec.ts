@@ -1,7 +1,7 @@
 import { Controller } from '@/application/controllers'
 import { LogControllerDecorator, Logger } from '@/main/decorators'
 import { RequiredValidator } from '@guilhermenicolini/core-validators'
-
+import { BaseError } from '@/application/errors'
 import { mock, MockProxy } from 'jest-mock-extended'
 
 describe('LogControllerDecorator', () => {
@@ -50,10 +50,23 @@ describe('LogControllerDecorator', () => {
     })
   })
 
-  test('Should call Logger if decoratee returns 500', async () => {
+  test('Should call Logger if decoratee returns BaseError with innerException', async () => {
+    const httpResponse = new BaseError('BaseError', 'any_message', new Error('any_inner_message'))
+    decoratee.perform.mockResolvedValueOnce(httpResponse)
+
+    await sut.perform({ any: 'any' })
+
+    expect(logger.log).toHaveBeenCalledTimes(1)
+    expect(logger.log).toHaveBeenCalledWith({
+      httpRequest: { any: 'any' },
+      httpResponse
+    })
+  })
+
+  test('Should call Logger if decoratee returns HttpResponse with BaseError with innerException', async () => {
     const httpResponse = {
-      statusCode: 500,
-      body: new Error('any_error')
+      statusCode: 400,
+      error: new BaseError('BaseError', 'any_message', new Error('any_inner_message'))
     }
     decoratee.perform.mockResolvedValueOnce(httpResponse)
 

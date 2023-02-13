@@ -18,25 +18,25 @@ export const noContent = (): HttpResponse => ({
 
 export const badRequest = (error: Error): HttpResponse => ({
   statusCode: 400,
-  body: error
+  error
 })
 
 export const unauthorized = (error: Error): HttpResponse => ({
   statusCode: 401,
-  body: error
+  error
 })
 
 export const forbidden = (error: Error): HttpResponse => ({
   statusCode: 403,
-  body: error
+  error
 })
 
 export const notFound = (error: Error): HttpResponse => ({
   statusCode: 404,
-  body: error
+  error
 })
 
 export const serverError = (error: unknown): HttpResponse => ({
   statusCode: 500,
-  body: new ServerError(error instanceof Error ? error : undefined)
+  error: new ServerError(error instanceof Error ? error : undefined)
 })

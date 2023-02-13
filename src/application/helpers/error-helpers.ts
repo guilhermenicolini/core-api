@@ -8,11 +8,11 @@ import {
 } from '../errors'
 
 export const handleResponse = (data: HttpResponse | Error): HttpResponse => {
-  if (data instanceof BadRequestError) return { statusCode: 400, body: data }
-  if (data instanceof UnauthorizedError) return { statusCode: 401, body: data }
-  if (data instanceof ForbiddenError) return { statusCode: 403, body: data }
-  if (data instanceof NotFoundError) return { statusCode: 404, body: data }
-  if (data instanceof ServerError) return { statusCode: 500, body: data }
-  if (data instanceof Error) return { statusCode: 400, body: data }
+  if (data instanceof BadRequestError) return { statusCode: 400, error: data }
+  if (data instanceof UnauthorizedError) return { statusCode: 401, error: data }
+  if (data instanceof ForbiddenError) return { statusCode: 403, error: data }
+  if (data instanceof NotFoundError) return { statusCode: 404, error: data }
+  if (data instanceof ServerError) return { statusCode: 500, error: data }
+  if (data instanceof Error) return { statusCode: 400, error: data }
   return data
 }

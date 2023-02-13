@@ -40,7 +40,7 @@ describe('Http Helpers', () => {
     const httpResponse = badRequest(error)
     expect(httpResponse).toEqual({
       statusCode: 400,
-      body: error
+      error
     })
   })
 
@@ -48,7 +48,7 @@ describe('Http Helpers', () => {
     const httpResponse = unauthorized(error)
     expect(httpResponse).toEqual({
       statusCode: 401,
-      body: error
+      error
     })
   })
 
@@ -56,7 +56,7 @@ describe('Http Helpers', () => {
     const httpResponse = forbidden(error)
     expect(httpResponse).toEqual({
       statusCode: 403,
-      body: error
+      error
     })
   })
 
@@ -64,7 +64,7 @@ describe('Http Helpers', () => {
     const httpResponse = notFound(error)
     expect(httpResponse).toEqual({
       statusCode: 404,
-      body: error
+      error
     })
   })
 
@@ -72,7 +72,7 @@ describe('Http Helpers', () => {
     const httpResponse = serverError(error)
     expect(httpResponse).toEqual({
       statusCode: 500,
-      body: new ServerError(error)
+      error: new ServerError(error)
     })
   })
 })

@@ -55,7 +55,7 @@ describe('ExpressMiddleware Adapter', () => {
   test('Should return if status is not 200', async () => {
     middleware.handle.mockResolvedValueOnce({
       statusCode: 400,
-      body: new Error('any_error')
+      error: new Error('any_error')
     })
 
     await sut(req, res, next)
@@ -69,7 +69,7 @@ describe('ExpressMiddleware Adapter', () => {
   test('Should call __ on response error', async () => {
     middleware.handle.mockResolvedValueOnce({
       statusCode: 400,
-      body: new Error('any_error')
+      error: new Error('any_error')
     })
     const i18nSpy = jest.fn()
     res.__ = i18nSpy

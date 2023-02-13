@@ -5,6 +5,8 @@
   },
   "rules": {
     "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/consistent-type-imports": "off",
+    "@typescript-eslint/consistent-type-exports": "off",
     "@typescript-eslint/no-namespace": "off",
     "import/export": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",

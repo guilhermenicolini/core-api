@@ -1,5 +1,5 @@
 declare module Express {
   interface Response {
-    __?: Function
+    __?: (message?: string) => tring
   }
 }

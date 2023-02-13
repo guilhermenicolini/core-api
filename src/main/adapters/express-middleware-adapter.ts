@@ -11,6 +11,6 @@ export const adaptExpressMiddleware: Adapter = middleware => async (req, res, ne
   if (statusCode === 200) {
     next()
   } else {
-    res.status(statusCode).json({ code: body.code || body.name, error: res.__ ? res.__(body.message) : body.message })
+    res.status(statusCode).json({ error: res.__ ? res.__(body.message) : body.message })
   }
 }

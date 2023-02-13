@@ -12,7 +12,7 @@ export const adaptExpressRoute: Adapter = controller => async (req, res) => {
   if (statusCode >= 200 && statusCode <= 299) {
     data = body
   } else {
-    data = { code: body.code || body.name, error: res.__ ? res.__(body.message) : body.message }
+    data = { error: res.__ ? res.__(body.message) : body.message }
   }
   res.status(statusCode).json(data)
 }

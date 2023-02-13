@@ -2,6 +2,7 @@ export { default as app } from './main/config/app'
 
 export {
   Controller,
+  BaseError,
   BadRequestError,
   UnauthorizedError,
   ForbiddenError,

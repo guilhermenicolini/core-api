@@ -238,6 +238,15 @@ Return notFound helper
 > ##### ServerError
 Return serverError helper
 
+#### Available errors
+
+> ##### BaseError
+> ##### BadRequestError
+> ##### UnauthorizedError
+> ##### ForbiddenError
+> ##### NotFoundError
+> ##### ServerError
+
 #### Available Http Helpers
 
 > ##### handleResponse

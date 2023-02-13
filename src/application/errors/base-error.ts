@@ -1,9 +1,8 @@
-
 export class BaseError extends Error {
-  readonly code?: string
-  constructor (name: string, message: string, code?: string) {
+  readonly innerException: Error | undefined
+  constructor (name: string, message: string, error?: Error) {
     super(message)
     this.name = name
-    this.code = code
+    this.innerException = error
   }
 }

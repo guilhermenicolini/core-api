@@ -1,9 +1,9 @@
-export class ServerError extends Error {
-  readonly innerException: Error | undefined
+import { BaseError } from './base-error'
+
+export class ServerError extends BaseError {
   constructor (error: Error | undefined) {
-    super('An error occurred while processing your request. Please, try again later')
+    super('ServerError', 'An error occurred while processing your request. Please, try again later', error)
     this.name = 'ServerError'
-    this.innerException = error
   }
 
   toJSON (): string {

@@ -14,5 +14,6 @@ export const adaptExpressRoute: Adapter = controller => async (req, res) => {
   } else {
     data = { error: res.__ ? res.__(error.message) : error.message }
   }
+
   res.status(statusCode).json(data)
 }

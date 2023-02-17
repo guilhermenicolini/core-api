@@ -7,6 +7,6 @@ export abstract class BaseError extends Error {
   }
 
   toJSON (): string {
-    return `${this.message}. Inner error: ${this.innerException?.message as string}`
+    return `${this.message}. Inner error: ${this.innerException?.message as string} Inner stack: ${this.innerException?.stack as string}`
   }
 }

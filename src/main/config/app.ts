@@ -1,8 +1,12 @@
+import setupSwagger from './swagger'
 import setupMiddlewares from './middlewares'
-import { setupRoutes } from './routes'
-import express from 'express'
+import setupRoutes from './routes'
+import express, { Express } from 'express'
 
-const app = express()
-setupMiddlewares(app)
-setupRoutes(app)
-export default app
+export default (swaggerConfig?: any): Express => {
+  const app = express()
+  setupSwagger(app, swaggerConfig)
+  setupMiddlewares(app)
+  setupRoutes(app)
+  return app
+}

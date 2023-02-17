@@ -56,7 +56,10 @@ npm install @guilhermenicolini/core-api@latest
 
 #### App
 ```
-  import { app } from '@guilhermenicolini/core-api'
+  import { App } from '@guilhermenicolini/core-api'
+  import swaggerConfig from './swagger'
+
+  const app = App(swaggerConfig)
 
   app.use('/test', (req, res) => {
     res.send({})
@@ -64,6 +67,7 @@ npm install @guilhermenicolini/core-api@latest
 ```
 App is an instance of express() with some pre-defined configurations:
 - /health route
+- /api-docs (Swagger)
 - body parser middleware that transform body into JSON
 - trim all body and headers string values
 - content-type middleware that set content-type to JSON

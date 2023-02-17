@@ -1,7 +1,8 @@
-import app from '@/main/config/app'
+import App from '@/main/config/app'
 import { redirect } from '@/main/middlewares'
-
 import request from 'supertest'
+
+const app = App()
 
 describe('Redirect Middleware', () => {
   test('Should redirect to specified route', async () => {

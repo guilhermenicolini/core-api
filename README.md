@@ -144,13 +144,17 @@ Decorate Controller with any Logger implementation
   export const makeMyController = (): Controller => {
     const decoratee = new MyController()
     const logger = new MyLogger()
-    return new LogControllerDecorator(decoratee, logger, true)
+    return new LogControllerDecorator(decoratee, logger, level)
   }
 ```
 This decorator calls Logger implementation after getting decoratee perform response. The decorator receives 3 parameters:
 - decoratee: The controller to be decorated
 - logger: The Logger implementation
-- enabled: If false, logger will log only http 500 errors. If true, logger will log all requests
+- level:
+  - LOG_NONE: do not log any request/response
+  - LOG_INFO: log all request/response
+  - LOG_WARNING: log only http status codes >= 400
+  - LOG_ERROR: log only internal errors
 
 #### Available Classes
 

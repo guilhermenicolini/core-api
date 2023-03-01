@@ -226,7 +226,7 @@ Factory helper to create a LogControllerDecorator using ConsoleLog Logger
   import { makeConsoleLogControllerDecorator } from '@guilhermenicolini/core-api'
   import { MyController } from './my-controller'
 
-  makeConsoleLogControllerDecorator(new MyController, true)
+  makeConsoleLogControllerDecorator(new MyController, 'LOG_ERROR')
 ```
 
 #### Available Error Helpers

@@ -15,7 +15,13 @@ describe('ExpressMiddleware Adapter', () => {
     next = getMockRes().next
     middleware = mock<Middleware>()
     middleware.handle.mockResolvedValue({
-      statusCode: 200
+      statusCode: 200,
+      body: {
+        emptyProp: '',
+        nullProp: null,
+        undefinedProp: undefined,
+        prop: 'any_value'
+      }
     })
   })
 
@@ -77,5 +83,11 @@ describe('ExpressMiddleware Adapter', () => {
     await sut(req, res, next)
 
     expect(i18nSpy).toHaveBeenCalledWith('any_error')
+  })
+
+  test('Should add valid data to req.locals', async () => {
+    await sut(req, res, next)
+    expect(next).toHaveBeenCalledTimes(1)
+    expect(req.locals).toEqual({ prop: 'any_value' })
   })
 })

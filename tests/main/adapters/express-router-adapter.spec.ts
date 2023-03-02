@@ -19,13 +19,17 @@ describe('ExpressRouter Adapter', () => {
       },
       params: {
         anyParam: 'any_param',
-        anyHeader: 'param_header'
+        anyHeader: 'param_header',
+        anyLocals: 'parap_locals'
       },
       body: {
         anyBody: 'any_body',
         anyParam: 'body_param',
-        anyHeader: 'body_header'
-
+        anyHeader: 'body_header',
+        anyLocals: 'body_locals'
+      },
+      locals: {
+        anyLocals: 'any_locals'
       }
     })
     next = getMockRes().next
@@ -47,7 +51,8 @@ describe('ExpressRouter Adapter', () => {
     expect(controller.handle).toHaveBeenCalledWith({
       anyHeader: 'any_header',
       anyParam: 'any_param',
-      anyBody: 'any_body'
+      anyBody: 'any_body',
+      anyLocals: 'any_locals'
     })
     expect(controller.handle).toHaveBeenCalledTimes(1)
   })

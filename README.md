@@ -109,11 +109,10 @@ Adapt Middleware implementations into express middleware
   }
 ```
 This adapter pass the following properties to Middleware:
-- application: process.env.HEADER_APPLICATION,
-- agencyId: process.env.HEADER_AGENCY,
-- siteId: process.env.HEADER_SITE,
-- userId: process.env.HEADER_ID,
-- userRoles: process.env.HEADER_ROLES
+- body
+- params
+- headers
+Also, this adaptar pass Middleware body response as locals to Controller
 
 > ##### Controller
 Adapt Controller implementations into express function
@@ -130,7 +129,8 @@ Adapt Controller implementations into express function
 This adapter trim spaces of all body string properties and pass the following unified properties to Controller:
 - body
 - params
-- Middleware adapter headers above
+- headers
+- locals => Middleware adapter body response
 
 #### Decorators
 

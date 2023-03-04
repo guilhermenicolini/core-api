@@ -20,7 +20,7 @@ export {
   handleResponse
 } from './application'
 
-export { adaptExpressMiddleware, adaptExpressRoute } from './main/adapters'
+export { adaptExpressMiddleware, adaptExpressRoute, adaptMulter } from './main/adapters'
 export { HttpClient, HttpMethod, HttpRequest, HttpResponse, HttpStatusCode, Logger } from './gateways'
 export { LogControllerDecorator } from './main/decorators'
 

@@ -30,8 +30,7 @@ describe('ExpressRouter Adapter', () => {
       },
       locals: {
         anyLocals: 'any_locals'
-      },
-      files: 'any_files'
+      }
     })
     next = getMockRes().next
     controller = mock<Controller>()
@@ -53,8 +52,7 @@ describe('ExpressRouter Adapter', () => {
       anyHeader: 'any_header',
       anyParam: 'any_param',
       anyBody: 'any_body',
-      anyLocals: 'any_locals',
-      files: 'any_files'
+      anyLocals: 'any_locals'
     })
     expect(controller.handle).toHaveBeenCalledTimes(1)
   })

@@ -5,8 +5,7 @@ export const getRequest = (req: Request): any => {
     ...req.body,
     ...req.params,
     ...req.headers,
-    ...req.locals,
-    files: req.files
+    ...req.locals
   }
 
   return request

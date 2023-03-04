@@ -112,6 +112,7 @@ This adapter pass the following properties to Middleware:
 - body
 - params
 - headers
+- files
 Also, this adaptar pass Middleware body response as locals to Controller
 
 > ##### Controller
@@ -130,6 +131,7 @@ This adapter trim spaces of all body string properties and pass the following un
 - body
 - params
 - headers
+- files
 - locals => Middleware adapter body response
 
 #### Decorators

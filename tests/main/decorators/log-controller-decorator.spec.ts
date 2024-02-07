@@ -1,7 +1,7 @@
 import { Controller } from '@/application/controllers'
 import { LogControllerDecorator, Logger } from '@/main/decorators'
 import { RequiredValidator } from '@guilhermenicolini/core-validators'
-import { BadRequestError } from '@/application/errors'
+import { ServerError, BadRequestError } from '@/application/errors'
 import { mock, MockProxy } from 'jest-mock-extended'
 
 describe('LogControllerDecorator', () => {
@@ -20,7 +20,7 @@ describe('LogControllerDecorator', () => {
 
   describe('Base', () => {
     beforeEach(() => {
-      sut = new LogControllerDecorator(decoratee, logger, 'LOG_NONE')
+      sut = new LogControllerDecorator(decoratee, logger)
     })
 
     test('Should extend Controller', async () => {
@@ -48,168 +48,76 @@ describe('LogControllerDecorator', () => {
     })
   })
 
-  describe('LOG_NONE', () => {
+  describe('info', () => {
     beforeEach(() => {
-      sut = new LogControllerDecorator(decoratee, logger, 'LOG_NONE')
-    })
-
-    test('Should not call Logger on 2xx', async () => {
-      await sut.perform({ any: 'any' })
-
-      expect(logger.log).not.toHaveBeenCalled()
-    })
-
-    test('Should not call Logger on 4xx', async () => {
-      decoratee.perform.mockResolvedValueOnce({ statusCode: 400 })
-      await sut.perform({ any: 'any' })
-
-      expect(logger.log).not.toHaveBeenCalled()
-    })
-
-    test('Should not call Logger on BaseError', async () => {
-      decoratee.perform.mockResolvedValueOnce(error)
-      await sut.perform({ any: 'any' })
-
-      expect(logger.log).not.toHaveBeenCalled()
-    })
-
-    test('Should not call Logger on throw', async () => {
-      decoratee.perform.mockRejectedValueOnce(error)
-      const promise = sut.perform({ any: 'any' })
-
-      await expect(promise).rejects.toThrowError(error)
-      expect(logger.log).not.toHaveBeenCalled()
-    })
-  })
-
-  describe('LOG_INFO', () => {
-    beforeEach(() => {
-      sut = new LogControllerDecorator(decoratee, logger, 'LOG_INFO')
+      sut = new LogControllerDecorator(decoratee, logger)
     })
 
     test('Should call Logger on 2xx', async () => {
       await sut.perform({ any: 'any' })
 
-      expect(logger.log).toHaveBeenCalledTimes(1)
-      expect(logger.log).toHaveBeenCalledWith({
+      expect(logger.info).toHaveBeenCalledTimes(1)
+      expect(logger.info).toHaveBeenCalledWith({
         httpRequest: { any: 'any' },
         httpResponse: { statusCode: 204 }
       })
     })
+  })
 
-    test('Should call Logger on 4xx', async () => {
-      decoratee.perform.mockResolvedValueOnce({ statusCode: 400, error })
+  describe('warning', () => {
+    beforeEach(() => {
+      sut = new LogControllerDecorator(decoratee, logger)
+    })
+
+    test('Should not call Logger on 2xx', async () => {
       await sut.perform({ any: 'any' })
 
-      expect(logger.log).toHaveBeenCalledTimes(1)
-      expect(logger.log).toHaveBeenCalledWith({
-        httpRequest: { any: 'any' },
-        httpResponse: { statusCode: 400, error }
-      })
+      expect(logger.warning).not.toHaveBeenCalled()
     })
 
     test('Should call Logger on BaseError', async () => {
       decoratee.perform.mockResolvedValueOnce(error)
       await sut.perform({ any: 'any' })
 
-      expect(logger.log).toHaveBeenCalledTimes(1)
-      expect(logger.log).toHaveBeenCalledWith({
+      expect(logger.warning).toHaveBeenCalledTimes(1)
+      expect(logger.warning).toHaveBeenCalledWith({
         httpRequest: { any: 'any' },
         httpResponse: error
       })
-    })
-
-    test('Should not call Logger on throw', async () => {
-      decoratee.perform.mockRejectedValueOnce(error)
-      const promise = sut.perform({ any: 'any' })
-
-      await expect(promise).rejects.toThrowError(error)
-      expect(logger.log).not.toHaveBeenCalled()
-    })
-  })
-
-  describe('LOG_WARNING', () => {
-    beforeEach(() => {
-      sut = new LogControllerDecorator(decoratee, logger, 'LOG_WARNING')
-    })
-
-    test('Should not call Logger on 2xx', async () => {
-      await sut.perform({ any: 'any' })
-
-      expect(logger.log).not.toHaveBeenCalled()
     })
 
     test('Should call Logger on 4xx', async () => {
       decoratee.perform.mockResolvedValueOnce({ statusCode: 400, error })
       await sut.perform({ any: 'any' })
 
-      expect(logger.log).toHaveBeenCalledTimes(1)
-      expect(logger.log).toHaveBeenCalledWith({
+      expect(logger.warning).toHaveBeenCalledTimes(1)
+      expect(logger.warning).toHaveBeenCalledWith({
         httpRequest: { any: 'any' },
         httpResponse: { statusCode: 400, error }
       })
     })
-
-    test('Should not call Logger on BaseError', async () => {
-      decoratee.perform.mockResolvedValueOnce(error)
-      await sut.perform({ any: 'any' })
-
-      expect(logger.log).not.toHaveBeenCalled()
-    })
-
-    test('Should not call Logger on throw', async () => {
-      decoratee.perform.mockRejectedValueOnce(error)
-      const promise = sut.perform({ any: 'any' })
-
-      await expect(promise).rejects.toThrowError(error)
-      expect(logger.log).not.toHaveBeenCalled()
-    })
   })
 
-  describe('LOG_ERROR', () => {
+  describe('error', () => {
     beforeEach(() => {
-      sut = new LogControllerDecorator(decoratee, logger, 'LOG_ERROR')
+      sut = new LogControllerDecorator(decoratee, logger)
     })
 
     test('Should not call Logger on 2xx', async () => {
       await sut.perform({ any: 'any' })
 
-      expect(logger.log).not.toHaveBeenCalled()
+      expect(logger.error).not.toHaveBeenCalled()
     })
 
-    test('Should not call Logger on 4xx', async () => {
-      decoratee.perform.mockResolvedValueOnce({ statusCode: 400 })
+    test('Should call Logger on ServerError', async () => {
+      const err = new ServerError(error)
+      decoratee.perform.mockResolvedValueOnce(err)
       await sut.perform({ any: 'any' })
 
-      expect(logger.log).not.toHaveBeenCalled()
-    })
-
-    test('Should call Logger on BaseError with innerException', async () => {
-      const httpResponse = new BadRequestError('any_message', new Error('any_inner_message'))
-      decoratee.perform.mockResolvedValueOnce(httpResponse)
-
-      await sut.perform({ any: 'any' })
-
-      expect(logger.log).toHaveBeenCalledTimes(1)
-      expect(logger.log).toHaveBeenCalledWith({
+      expect(logger.error).toHaveBeenCalledTimes(1)
+      expect(logger.error).toHaveBeenCalledWith({
         httpRequest: { any: 'any' },
-        httpResponse
-      })
-    })
-
-    test('Should call Logger on HttpResponse with BaseError with innerException', async () => {
-      const httpResponse = {
-        statusCode: 400,
-        error: new BadRequestError('any_message', new Error('any_inner_message'))
-      }
-      decoratee.perform.mockResolvedValueOnce(httpResponse)
-
-      await sut.perform({ any: 'any' })
-
-      expect(logger.log).toHaveBeenCalledTimes(1)
-      expect(logger.log).toHaveBeenCalledWith({
-        httpRequest: { any: 'any' },
-        httpResponse
+        httpResponse: err
       })
     })
 
@@ -220,8 +128,8 @@ describe('LogControllerDecorator', () => {
       const promise = sut.perform({ any: 'any' })
 
       await expect(promise).rejects.toThrow(err)
-      expect(logger.log).toHaveBeenCalledTimes(1)
-      expect(logger.log).toHaveBeenCalledWith({
+      expect(logger.error).toHaveBeenCalledTimes(1)
+      expect(logger.error).toHaveBeenCalledWith({
         httpRequest: { any: 'any' },
         httpResponse: err
       })

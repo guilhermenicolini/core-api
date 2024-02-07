@@ -1,3 +1,5 @@
 export interface Logger {
-  log: (data: any) => Promise<void>
+  info: (data: any) => Promise<void>
+  warning: (data: any) => Promise<void>
+  error: (data: any) => Promise<void>
 }

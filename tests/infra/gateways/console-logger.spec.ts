@@ -7,15 +7,27 @@ describe('ConsoleLogger', () => {
     sut = new ConsoleLogger()
   })
 
-  test('Should call console.log with correct input', async () => {
-    const spy = jest.spyOn(console, 'log').mockReturnValueOnce()
-    await sut.log('data')
-    expect(spy).toHaveBeenCalledWith('data')
+  describe('info', () => {
+    test('Should call console.log with correct input', async () => {
+      const spy = jest.spyOn(console, 'info').mockReturnValueOnce()
+      await sut.info('data')
+      expect(spy).toHaveBeenCalledWith(JSON.stringify('data'))
+    })
   })
 
-  test('Should not throw if console.log throws', async () => {
-    jest.spyOn(console, 'log').mockImplementationOnce(() => { throw new Error('any_error') })
-    const result = await sut.log('data')
-    expect(result).toBeUndefined()
+  describe('warning', () => {
+    test('Should call console.log with correct input', async () => {
+      const spy = jest.spyOn(console, 'warn').mockReturnValueOnce()
+      await sut.warning('data')
+      expect(spy).toHaveBeenCalledWith(JSON.stringify('data'))
+    })
+  })
+
+  describe('error', () => {
+    test('Should call console.log with correct input', async () => {
+      const spy = jest.spyOn(console, 'error').mockReturnValueOnce()
+      await sut.error('data')
+      expect(spy).toHaveBeenCalledWith(JSON.stringify('data'))
+    })
   })
 })

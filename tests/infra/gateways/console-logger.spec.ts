@@ -11,7 +11,7 @@ describe('ConsoleLogger', () => {
     test('Should call console.log with correct input', async () => {
       const spy = jest.spyOn(console, 'info').mockReturnValueOnce()
       await sut.info('data')
-      expect(spy).toHaveBeenCalledWith(JSON.stringify('data'))
+      expect(spy).toHaveBeenCalledWith('data')
     })
   })
 
@@ -19,7 +19,7 @@ describe('ConsoleLogger', () => {
     test('Should call console.log with correct input', async () => {
       const spy = jest.spyOn(console, 'warn').mockReturnValueOnce()
       await sut.warning('data')
-      expect(spy).toHaveBeenCalledWith(JSON.stringify('data'))
+      expect(spy).toHaveBeenCalledWith('data')
     })
   })
 
@@ -27,7 +27,7 @@ describe('ConsoleLogger', () => {
     test('Should call console.log with correct input', async () => {
       const spy = jest.spyOn(console, 'error').mockReturnValueOnce()
       await sut.error('data')
-      expect(spy).toHaveBeenCalledWith(JSON.stringify('data'))
+      expect(spy).toHaveBeenCalledWith('data')
     })
   })
 })

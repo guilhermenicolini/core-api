@@ -5,6 +5,7 @@ export type HttpRequest = {
   method: HttpMethod
   body?: any
   headers?: any
+  cookies?: any
 }
 
 export enum HttpStatusCode {
@@ -24,6 +25,8 @@ export type HttpResponse<Response = any> = {
   statusCode: HttpStatusCode
   error?: any
   body?: Response
+  authorization?: string
+  refreshToken?: string
 }
 
 export interface HttpClient {

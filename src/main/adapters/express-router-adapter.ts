@@ -6,10 +6,13 @@ type Adapter = (controller: Controller) => RequestHandler
 
 export const adaptExpressRoute: Adapter = controller => async (req, res) => {
   const request = getRequest(req)
-  const { statusCode, body, error } = await controller.handle(request)
+  const { statusCode, body, error, authorization, refreshToken } = await controller.handle(request)
 
   let data: any
   if (statusCode >= 200 && statusCode <= 299) {
+    if (authorization) res.set('Authorization', authorization)
+    if (refreshToken) res.cookie('refreshToken', refreshToken, { httpOnly: true })
+
     data = body
   } else {
     data = { error: res.__ ? res.__(error.message) : error.message }

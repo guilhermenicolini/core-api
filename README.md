@@ -278,6 +278,9 @@ Used to Middleware and Controller handle function. If perform returns any instan
 > ##### ok
 Return 200 and specified body
 
+> ##### auth
+Return 200 and specified body, authorization header and refresh token cookie
+
 > ##### created
 Return 201 and specified body
 

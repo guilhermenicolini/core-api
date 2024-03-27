@@ -1,5 +1,6 @@
 import {
   ok,
+  auth,
   created,
   noContent,
   badRequest,
@@ -18,6 +19,16 @@ describe('Http Helpers', () => {
     expect(httpResponse).toEqual({
       statusCode: 200,
       body: 'data'
+    })
+  })
+
+  test('Should return 200 on auth', () => {
+    const httpResponse = auth('authorization', 'refreshToken', 'data')
+    expect(httpResponse).toEqual({
+      statusCode: 200,
+      body: 'data',
+      authorization: 'authorization',
+      refreshToken: 'refreshToken'
     })
   })
 

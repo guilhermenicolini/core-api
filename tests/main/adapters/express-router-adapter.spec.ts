@@ -36,7 +36,9 @@ describe('ExpressRouter Adapter', () => {
     controller = mock<Controller>()
     controller.handle.mockResolvedValue({
       statusCode: 200,
-      body: { data: 'any_data' }
+      body: { data: 'any_data' },
+      authorization: 'any_authorization',
+      refreshToken: 'any_refresh_token'
     })
   })
 
@@ -73,6 +75,10 @@ describe('ExpressRouter Adapter', () => {
     expect(res.status).toHaveBeenCalledTimes(1)
     expect(res.json).toHaveBeenCalledWith({ data: 'any_data' })
     expect(res.json).toHaveBeenCalledTimes(1)
+    expect(res.set).toHaveBeenCalledTimes(1)
+    expect(res.set).toHaveBeenCalledWith('Authorization', 'any_authorization')
+    expect(res.cookie).toHaveBeenCalledTimes(1)
+    expect(res.cookie).toHaveBeenCalledWith('refreshToken', 'any_refresh_token', { httpOnly: true })
   })
 
   test('Should return 400 and valid error', async () => {

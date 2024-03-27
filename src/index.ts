@@ -10,6 +10,7 @@ export {
   ServerError,
   Middleware,
   ok,
+  auth,
   created,
   noContent,
   badRequest,

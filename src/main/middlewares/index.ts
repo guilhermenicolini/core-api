@@ -1,5 +1,6 @@
 export * from './body-parser-middleware'
 export * from './content-type-middleware'
+export * from './cookie-parser-middleware'
 export * from './cors-middleware'
 export * from './no-cache-middleware'
 export * from './redirect-middleware'

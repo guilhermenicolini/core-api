@@ -30,6 +30,9 @@ describe('ExpressMiddleware Adapter', () => {
     req = getMockReq({
       headers: {
         anyHeader: 'any_header'
+      },
+      signedCookies: {
+        any_signed_cookie: 'any_value'
       }
     })
     sut = adaptExpressMiddleware(middleware)
@@ -39,6 +42,7 @@ describe('ExpressMiddleware Adapter', () => {
     await sut(req, res, next)
 
     expect(middleware.handle).toHaveBeenCalledWith({
+      any_signed_cookie: 'any_value',
       anyHeader: 'any_header'
     })
     expect(middleware.handle).toHaveBeenCalledTimes(1)

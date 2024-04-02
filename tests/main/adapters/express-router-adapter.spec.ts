@@ -17,6 +17,9 @@ describe('ExpressRouter Adapter', () => {
       headers: {
         anyHeader: 'any_header'
       },
+      signedCookies: {
+        any_signed_cookie: 'any_value'
+      },
       params: {
         anyParam: 'any_param',
         anyHeader: 'param_header',
@@ -51,6 +54,7 @@ describe('ExpressRouter Adapter', () => {
     await sut(req, res, next)
 
     expect(controller.handle).toHaveBeenCalledWith({
+      any_signed_cookie: 'any_value',
       anyHeader: 'any_header',
       anyParam: 'any_param',
       anyBody: 'any_body',
@@ -78,7 +82,7 @@ describe('ExpressRouter Adapter', () => {
     expect(res.set).toHaveBeenCalledTimes(1)
     expect(res.set).toHaveBeenCalledWith('Authorization', 'any_authorization')
     expect(res.cookie).toHaveBeenCalledTimes(1)
-    expect(res.cookie).toHaveBeenCalledWith('refreshToken', 'any_refresh_token', { httpOnly: true })
+    expect(res.cookie).toHaveBeenCalledWith('refreshToken', 'any_refresh_token', { httpOnly: true, signed: true })
   })
 
   test('Should return 400 and valid error', async () => {

@@ -11,7 +11,7 @@ export const adaptExpressRoute: Adapter = controller => async (req, res) => {
   let data: any
   if (statusCode >= 200 && statusCode <= 299) {
     if (authorization) res.set('Authorization', authorization)
-    if (refreshToken) res.cookie('refreshToken', refreshToken, { httpOnly: true })
+    if (refreshToken) res.cookie('refreshToken', refreshToken, { httpOnly: true, signed: true })
 
     data = body
   } else {

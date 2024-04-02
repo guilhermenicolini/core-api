@@ -111,6 +111,7 @@ Adapt Middleware implementations into express middleware
 This adapter pass the following properties to Middleware:
 - body
 - params
+- cookies (only signed using COOKIE_SECRET environment variable)
 - headers
 Also, this adaptar pass Middleware body response as locals to Controller
 
@@ -129,6 +130,7 @@ Adapt Controller implementations into express function
 This adapter trim spaces of all body string properties and pass the following unified properties to Controller:
 - body
 - params
+- cookies (only signed using COOKIE_SECRET environment variable)
 - headers
 - locals => Middleware adapter body response
 

@@ -7,7 +7,7 @@ export const ok = (data?: any): HttpResponse => ({
   body: data
 })
 
-export const auth = (authorization: string, refreshToken: string, data?: any): HttpResponse => ({
+export const auth = (authorization: string, refreshToken?: string, data?: any): HttpResponse => ({
   statusCode: 200,
   body: data,
   authorization,

@@ -14,22 +14,35 @@ describe('ExpressRouter Adapter', () => {
 
   beforeAll(() => {
     req = getMockReq({
-      headers: {
-        anyHeader: 'any_header'
+      body: {
+        anyBody: 'any_body',
+        anyQuery: 'body_query',
+        anyParam: 'body_param',
+        any_signed_cookie: 'body_signed_cookie',
+        anyHeader: 'body_header',
+        anyLocals: 'body_locals'
       },
-      signedCookies: {
-        any_signed_cookie: 'any_value'
+      query: {
+        anyQuery: 'any_query',
+        anyParam: 'query_param',
+        any_signed_cookie: 'query_signed_cookie',
+        anyHeader: 'query_header',
+        anyLocals: 'query_locals'
       },
       params: {
         anyParam: 'any_param',
-        anyHeader: 'param_header',
-        anyLocals: 'parap_locals'
+        any_signed_cookie: 'params_signed_cookie',
+        anyHeader: 'params_header',
+        anyLocals: 'params_locals'
       },
-      body: {
-        anyBody: 'any_body',
-        anyParam: 'body_param',
-        anyHeader: 'body_header',
-        anyLocals: 'body_locals'
+      signedCookies: {
+        any_signed_cookie: 'any_signed_cookie',
+        anyHeader: 'signed_cookies_header',
+        anyLocals: 'signed_cookies_locals'
+      },
+      headers: {
+        anyHeader: 'any_header',
+        anyLocals: 'header_locals'
       },
       locals: {
         anyLocals: 'any_locals'
@@ -54,10 +67,11 @@ describe('ExpressRouter Adapter', () => {
     await sut(req, res, next)
 
     expect(controller.handle).toHaveBeenCalledWith({
-      any_signed_cookie: 'any_value',
-      anyHeader: 'any_header',
-      anyParam: 'any_param',
       anyBody: 'any_body',
+      anyQuery: 'any_query',
+      anyParam: 'any_param',
+      any_signed_cookie: 'any_signed_cookie',
+      anyHeader: 'any_header',
       anyLocals: 'any_locals'
     })
     expect(controller.handle).toHaveBeenCalledTimes(1)

@@ -28,11 +28,30 @@ describe('ExpressMiddleware Adapter', () => {
   beforeEach(() => {
     res = getMockRes().res
     req = getMockReq({
-      headers: {
-        anyHeader: 'any_header'
+      body: {
+        anyBody: 'any_body',
+        anyQuery: 'body_query',
+        anyParam: 'body_param',
+        any_signed_cookie: 'body_signed_cookie',
+        anyHeader: 'body_header'
+      },
+      query: {
+        anyQuery: 'any_query',
+        anyParam: 'query_param',
+        any_signed_cookie: 'query_signed_cookie',
+        anyHeader: 'query_header'
+      },
+      params: {
+        anyParam: 'any_param',
+        any_signed_cookie: 'params_signed_cookie',
+        anyHeader: 'params_header'
       },
       signedCookies: {
-        any_signed_cookie: 'any_value'
+        any_signed_cookie: 'any_signed_cookie',
+        anyHeader: 'signed_cookies_header'
+      },
+      headers: {
+        anyHeader: 'any_header'
       }
     })
     sut = adaptExpressMiddleware(middleware)
@@ -42,7 +61,10 @@ describe('ExpressMiddleware Adapter', () => {
     await sut(req, res, next)
 
     expect(middleware.handle).toHaveBeenCalledWith({
-      any_signed_cookie: 'any_value',
+      anyBody: 'any_body',
+      anyQuery: 'any_query',
+      anyParam: 'any_param',
+      any_signed_cookie: 'any_signed_cookie',
       anyHeader: 'any_header'
     })
     expect(middleware.handle).toHaveBeenCalledTimes(1)

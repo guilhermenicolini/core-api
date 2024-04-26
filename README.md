@@ -84,6 +84,14 @@ Logger interface used on LogControllerDecorator
     async log (data: any): Promise<void> {
       console.log(data)
     }
+
+    async warning (data: any): Promise<void> {
+      console.warn(data)
+    }
+
+    async error (data: any): Promise<void> {
+      console.error(data)
+    }
   }
 ```
 
@@ -108,8 +116,9 @@ Adapt Middleware implementations into express middleware
     }))
   }
 ```
-This adapter pass the following properties to Middleware:
+This adapter pass the following order properties to Middleware:
 - body
+- query
 - params
 - cookies (only signed using COOKIE_SECRET environment variable)
 - headers
@@ -127,8 +136,9 @@ Adapt Controller implementations into express function
     router.get('/public', adapt(new MyController()))
   }
 ```
-This adapter trim spaces of all body string properties and pass the following unified properties to Controller:
+This adapter trim spaces of all body string properties and pass the following unified properties order to Controller:
 - body
+- query
 - params
 - cookies (only signed using COOKIE_SECRET environment variable)
 - headers
@@ -161,17 +171,12 @@ Decorate Controller with any Logger implementation
   export const makeMyController = (): Controller => {
     const decoratee = new MyController()
     const logger = new MyLogger()
-    return new LogControllerDecorator(decoratee, logger, level)
+    return new LogControllerDecorator(decoratee, logger)
   }
 ```
 This decorator calls Logger implementation after getting decoratee perform response. The decorator receives 3 parameters:
 - decoratee: The controller to be decorated
 - logger: The Logger implementation
-- level:
-  - LOG_NONE: do not log any request/response
-  - LOG_INFO: log all request/response
-  - LOG_WARNING: log only http status codes >= 400
-  - LOG_ERROR: log only internal errors
 
 #### Available Classes
 

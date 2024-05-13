@@ -12,7 +12,7 @@ export const adaptExpressRoute: Adapter = controller => async (req, res) => {
   if (statusCode >= 200 && statusCode <= 299) {
     if (authorization) {
       res.set('Authorization', authorization)
-      res.set('Access-Control-Allow-Headers', 'Authorization')
+      res.set('Access-Control-Expose-Headers', 'Authorization')
     }
     if (refreshToken) res.cookie('refreshToken', refreshToken, { httpOnly: true, signed: true })
 

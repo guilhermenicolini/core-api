@@ -95,7 +95,7 @@ describe('ExpressRouter Adapter', () => {
     expect(res.json).toHaveBeenCalledTimes(1)
     expect(res.set).toHaveBeenCalledTimes(2)
     expect(res.set).toHaveBeenNthCalledWith(1, 'Authorization', 'any_authorization')
-    expect(res.set).toHaveBeenNthCalledWith(2, 'Access-Control-Allow-Headers', 'Authorization')
+    expect(res.set).toHaveBeenNthCalledWith(2, 'Access-Control-Expose-Headers', 'Authorization')
     expect(res.cookie).toHaveBeenCalledTimes(1)
     expect(res.cookie).toHaveBeenCalledWith('refreshToken', 'any_refresh_token', { httpOnly: true, signed: true })
   })

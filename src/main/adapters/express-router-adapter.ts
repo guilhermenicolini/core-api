@@ -14,7 +14,10 @@ export const adaptExpressRoute: Adapter = controller => async (req, res) => {
       res.set('Authorization', authorization)
       res.set('Access-Control-Expose-Headers', 'Authorization')
     }
-    if (refreshToken) res.cookie('refreshToken', refreshToken, { httpOnly: true, signed: true })
+    if (refreshToken) {
+      res.set('RefreshToken', refreshToken)
+      res.set('Access-Control-Expose-Headers', 'RefreshToken')
+    }
 
     data = body
   } else {

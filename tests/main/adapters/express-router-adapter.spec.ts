@@ -93,11 +93,12 @@ describe('ExpressRouter Adapter', () => {
     expect(res.status).toHaveBeenCalledTimes(1)
     expect(res.json).toHaveBeenCalledWith({ data: 'any_data' })
     expect(res.json).toHaveBeenCalledTimes(1)
-    expect(res.set).toHaveBeenCalledTimes(4)
+    expect(res.set).toHaveBeenCalledTimes(5)
     expect(res.set).toHaveBeenNthCalledWith(1, 'Authorization', 'any_authorization')
-    expect(res.set).toHaveBeenNthCalledWith(2, 'Access-Control-Expose-Headers', 'Authorization')
+    expect(res.set).toHaveBeenNthCalledWith(2, 'Access-Control-Expose-Headers', 'Content-Disposition, Authorization')
     expect(res.set).toHaveBeenNthCalledWith(3, 'RefreshToken', 'any_refresh_token')
-    expect(res.set).toHaveBeenNthCalledWith(4, 'Access-Control-Expose-Headers', 'RefreshToken')
+    expect(res.set).toHaveBeenNthCalledWith(4, 'Access-Control-Expose-Headers', 'Content-Disposition, RefreshToken')
+    expect(res.set).toHaveBeenNthCalledWith(5, 'Access-Control-Expose-Headers', 'Content-Disposition, Authorization, RefreshToken')
   })
 
   test('Should return 400 and valid error', async () => {

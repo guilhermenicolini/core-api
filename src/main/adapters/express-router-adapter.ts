@@ -12,11 +12,14 @@ export const adaptExpressRoute: Adapter = controller => async (req, res) => {
   if (statusCode >= 200 && statusCode <= 299) {
     if (authorization) {
       res.set('Authorization', authorization)
-      res.set('Access-Control-Expose-Headers', 'Authorization')
+      res.set('Access-Control-Expose-Headers', 'Content-Disposition, Authorization')
     }
     if (refreshToken) {
       res.set('RefreshToken', refreshToken)
-      res.set('Access-Control-Expose-Headers', 'RefreshToken')
+      res.set('Access-Control-Expose-Headers', 'Content-Disposition, RefreshToken')
+    }
+    if (authorization && refreshToken) {
+      res.set('Access-Control-Expose-Headers', 'Content-Disposition, Authorization, RefreshToken')
     }
 
     data = body

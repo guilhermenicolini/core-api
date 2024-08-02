@@ -259,6 +259,9 @@ Return badRequest helper
 > ##### UnauthorizedError
 Return unauthorized helper
 
+> ##### PaymentRequiredError
+Return paymentRequired helper
+
 > ##### ForbiddenError
 Return forbidden helper
 
@@ -273,6 +276,7 @@ Return serverError helper
 > ##### BaseError
 > ##### BadRequestError
 > ##### UnauthorizedError
+> ##### PaymentRequiredError
 > ##### ForbiddenError
 > ##### NotFoundError
 > ##### ServerError
@@ -298,6 +302,9 @@ Return 204
 Return 400 and specified body error
 
 > ##### unauthorized
+Return 401 and specified body error
+
+> ##### paymentRequired
 Return 401 and specified body error
 
 > ##### forbidden

@@ -1,6 +1,7 @@
 import { HttpResponse } from './http-helpers'
 import {
   BadRequestError,
+  PaymentRequiredError,
   ForbiddenError,
   NotFoundError,
   ServerError,
@@ -9,6 +10,7 @@ import {
 
 export const handleResponse = (data: HttpResponse | Error): HttpResponse => {
   if (data instanceof BadRequestError) return { statusCode: 400, error: data }
+  if (data instanceof PaymentRequiredError) return { statusCode: 402, error: data }
   if (data instanceof UnauthorizedError) return { statusCode: 401, error: data }
   if (data instanceof ForbiddenError) return { statusCode: 403, error: data }
   if (data instanceof NotFoundError) return { statusCode: 404, error: data }

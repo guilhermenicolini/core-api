@@ -33,6 +33,11 @@ export const unauthorized = (error: Error): HttpResponse => ({
   error
 })
 
+export const paymentRequired = (error: Error): HttpResponse => ({
+  statusCode: 402,
+  error
+})
+
 export const forbidden = (error: Error): HttpResponse => ({
   statusCode: 403,
   error

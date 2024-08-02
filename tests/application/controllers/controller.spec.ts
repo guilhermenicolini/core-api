@@ -5,7 +5,8 @@ import {
   BadRequestError,
   UnauthorizedError,
   ForbiddenError,
-  NotFoundError
+  NotFoundError,
+  PaymentRequiredError
 } from '@/application/errors'
 
 const validateSpy = jest.fn()
@@ -103,6 +104,18 @@ describe('Controller', () => {
       error
     })
   })
+
+  test('Should return 402 if perform returns PaymentRequiredError', async () => {
+    const error = new PaymentRequiredError('perform_error')
+    jest.spyOn(sut, 'perform').mockResolvedValueOnce(error)
+
+    const httpResponse = await sut.handle('any_value')
+    expect(httpResponse).toEqual({
+      statusCode: 402,
+      error
+    })
+  })
+
   test('Should return 403 if perform returns ForbiddenError', async () => {
     const error = new ForbiddenError('perform_error')
     jest.spyOn(sut, 'perform').mockResolvedValueOnce(error)

@@ -4,6 +4,7 @@ import {
   created,
   noContent,
   badRequest,
+  paymentRequired,
   unauthorized,
   forbidden,
   notFound,
@@ -59,6 +60,14 @@ describe('Http Helpers', () => {
     const httpResponse = unauthorized(error)
     expect(httpResponse).toEqual({
       statusCode: 401,
+      error
+    })
+  })
+
+  test('Should return 402', () => {
+    const httpResponse = paymentRequired(error)
+    expect(httpResponse).toEqual({
+      statusCode: 402,
       error
     })
   })

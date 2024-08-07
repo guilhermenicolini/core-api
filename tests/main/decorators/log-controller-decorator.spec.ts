@@ -131,7 +131,7 @@ describe('LogControllerDecorator', () => {
       expect(logger.error).toHaveBeenCalledTimes(1)
       expect(logger.error).toHaveBeenCalledWith({
         httpRequest: { any: 'any' },
-        httpResponse: err
+        httpResponse: { message: err.message, stack: err.stack }
       })
     })
   })

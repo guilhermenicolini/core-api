@@ -9,7 +9,7 @@ export const adaptExpressMiddleware: Adapter = middleware => async (req, res, ne
   const { statusCode, error, body } = await middleware.handle(request)
 
   if (statusCode === 200) {
-    const validEntries = Object.entries(body).filter(([, value]) => value)
+    const validEntries = Object.entries(body ?? {}).filter(([, value]) => value)
     req.locals = { ...req.locals, ...Object.fromEntries(validEntries) }
     next()
   } else {

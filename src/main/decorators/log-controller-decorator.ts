@@ -39,8 +39,8 @@ export class LogControllerDecorator extends Controller {
 
       await this.logger.info({ httpRequest, httpResponse })
       return httpResponse
-    } catch (err) {
-      await this.logger.error({ httpRequest, httpResponse: err })
+    } catch (err: any) {
+      await this.logger.error({ httpRequest, httpResponse: { message: err.message, stack: err.stack } })
       throw err
     }
   }

@@ -116,4 +116,13 @@ describe('ExpressMiddleware Adapter', () => {
     expect(next).toHaveBeenCalledTimes(1)
     expect(req.locals).toEqual({ prop: 'any_value' })
   })
+
+  test('Should not add data to req.locals if body is undefined', async () => {
+    middleware.handle.mockResolvedValueOnce({
+      statusCode: 200
+    })
+    await sut(req, res, next)
+    expect(next).toHaveBeenCalledTimes(1)
+    expect(req.locals).toEqual({})
+  })
 })

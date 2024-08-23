@@ -9,7 +9,7 @@ export const adaptMulter: RequestHandler = (req, res, next) => {
       return res.status(500).json({ error: new ServerError(error).message })
     }
     if (req.file !== undefined) {
-      req.locals = { ...req.locals, file: { buffer: req.file.buffer, mimeType: req.file.mimetype } }
+      req.locals = { ...req.locals, file: { buffer: req.file.buffer, mimeType: req.file.mimetype, name: req.file.originalname, size: req.file.size } }
     }
     next()
   })

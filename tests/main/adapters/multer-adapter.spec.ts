@@ -78,7 +78,9 @@ describe('Multer Adapter', () => {
       anyLocals: 'any_locals',
       file: {
         buffer: req.file?.buffer,
-        mimeType: req.file?.mimetype
+        mimeType: req.file?.mimetype,
+        name: req.file?.originalname,
+        size: req.file?.size
       }
     })
   })

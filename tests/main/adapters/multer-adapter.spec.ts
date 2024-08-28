@@ -41,7 +41,7 @@ describe('Multer Adapter', () => {
 
     expect(multerSpy).toHaveBeenCalledWith()
     expect(multerSpy).toHaveBeenCalledTimes(1)
-    expect(singleSpy).toHaveBeenCalledWith('picture')
+    expect(singleSpy).toHaveBeenCalledWith('file')
     expect(singleSpy).toHaveBeenCalledTimes(1)
     expect(uploadSpy).toHaveBeenCalledWith(req, res, expect.any(Function))
     expect(uploadSpy).toHaveBeenCalledTimes(1)

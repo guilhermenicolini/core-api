@@ -3,7 +3,7 @@ import { RequestHandler } from 'express'
 import { ServerError } from '@/application/errors'
 
 export const adaptMulter: RequestHandler = (req, res, next) => {
-  const upload = multer().single('picture')
+  const upload = multer().single('file')
   upload(req, res, error => {
     if (error !== undefined) {
       return res.status(500).json({ error: new ServerError(error).message })

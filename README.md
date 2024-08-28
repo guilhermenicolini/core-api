@@ -155,7 +155,7 @@ Enable single file upload into express function
     router.get('/public', upload)
   }
 ```
-This adapter receives an attachment with name picture and pass data to req.locals.file containing thr following informations:
+This adapter receives an attachment with name "file" and pass data to req.locals.file containing thr following informations:
 - buffer
 - mimeType
 

@@ -1,4 +1,4 @@
-export { default as app } from './main/config/app'
+export { default as app, AppConfig } from './main/config/app'
 
 export {
   Controller,

@@ -3,10 +3,15 @@ import setupMiddlewares from './middlewares'
 import setupRoutes from './routes'
 import express, { Express } from 'express'
 
-export default (swaggerConfig?: any): Express => {
+export type AppConfig = {
+  swaggerConfig?: any
+  healthCheck?: boolean
+}
+
+export default ({ swaggerConfig, healthCheck }: AppConfig = {}): Express => {
   const app = express()
   setupSwagger(app, swaggerConfig)
   setupMiddlewares(app)
-  setupRoutes(app)
+  setupRoutes(app, healthCheck)
   return app
 }

@@ -1,8 +1,8 @@
 import { Router, Express } from 'express'
 import setupHealthCheckRoutes from '../routes/health-check-routes'
 
-export default (app: Express): void => {
+export default (app: Express, healthCheck: boolean = true): void => {
   const router = Router({ mergeParams: true })
-  setupHealthCheckRoutes(router)
+  if (healthCheck) setupHealthCheckRoutes(router)
   app.use(router)
 }
